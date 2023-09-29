@@ -16,7 +16,7 @@ class FileInput extends Component {
   readFile(file){
     return new Promise(function(resolve, reject) {
     let reader = new FileReader(); 
-    reader.readAsText(file);
+    reader.readAsText(file,'iso-8859-15');
     reader.onload = function() {
       resolve (reader.result );
     };

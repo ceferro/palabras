@@ -3,7 +3,8 @@ import React, { Component } from "react";
 import axios from "axios"
 import { withCookies } from 'react-cookie';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'; 
-import BootstrapTable from 'react-bootstrap-table-next'
+import BootstrapTable from 'react-bootstrap-table-next';
+import './styles.css'
 
 class RepetitionsTable extends Component {
   constructor(props){

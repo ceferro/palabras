@@ -3,8 +3,10 @@ import React, { Component } from "react";
 import {Modifier, Editor, EditorState, CompositeDecorator, convertFromRaw} from "draft-js";
 import axios from "axios"
 import { withCookies } from 'react-cookie';
+import './styles.css';
 
 class TextPane extends Component {
+
   constructor(props) {
     super(props);
     const cookies = this.props.cookies;
@@ -62,7 +64,7 @@ class TextPane extends Component {
     if (this.repetition !== null) {
       rawContent = await this.getBlocksMarking(this.repetition)}
     else {
-      rawContent = await this.getBlocks()};
+      rawContent = await this.getRawBlocks()};
     const blocks = convertFromRaw(rawContent);
     let newEditorState = EditorState.createWithContent(blocks, decorator);
     this.setState({editorState: newEditorState});
@@ -118,17 +120,19 @@ async getBlocksMarking(aString) {
 
  render(){    
     return (
-      <div className="TextPane" onClick={this.focus}>
-        <Editor
-          customStyleMap={this.styleMap}
-          editorState = {this.state.editorState}
-          onChange={this.onChange}
-          placeholder="Enter some text..."
-          readOnly= {true}
-          ref={element => {
-            this.editor = element;
-          }}
-          />
+      <div className="TextPane" onClick={this.focus}  style={({ display: "flex" })}>
+        <main>
+          <Editor
+            customStyleMap={this.styleMap}
+            editorState = {this.state.editorState}
+            onChange={this.onChange}
+            placeholder="Enter some text..."
+            readOnly= {true}
+            ref={element => {
+              this.editor = element;
+            }}
+            />
+          </main>
       </div>
     );
   }
