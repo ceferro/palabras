@@ -1,15 +1,16 @@
-import './App.css';
+//import './App.css';
 import FileInput from './File-input';
 import TextPane from './TextPane';
-import RepetitionsTable from './Repetitions'
+import RepetitionsTable from './Repetitions';
+import './styles.css';
 
 function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <div className="App-header">
         <FileInput/>
-      </header>
+      </div>
       <div className="table">
         <RepetitionsTable/>
       </div>

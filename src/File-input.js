@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import axios from "axios"
 import { withCookies } from 'react-cookie';
+import './styles.css';
 
 class FileInput extends Component {
   constructor(props){
@@ -55,7 +56,7 @@ class FileInput extends Component {
         <input
           type="file"
           accept="text/plain"
-          className="mt-2 btn btn-dark w-75"
+          //className="mt-2 btn btn-dark w-75"
           onChange={e => this.handle(e)}
         />
       </div>

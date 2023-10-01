@@ -16,3 +16,21 @@ div.react-bootstrap-table {
     height: 250px;
     overflow-y: auto;
 }
+
+div.App-header {
+    border: 1px solid #000;
+    height: 100px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: gray;
+}
+
+div.FileInput {
+    height:70px;
+    background-color: grey;
+    align-items: center;
+    justify-content: center;
+}

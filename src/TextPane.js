@@ -1,6 +1,6 @@
 
 import React, { Component } from "react";
-import {Modifier, Editor, EditorState, CompositeDecorator, convertFromRaw} from "draft-js";
+import {Modifier, Editor, EditorState, CompositeDecorator, SelectionState, convertFromRaw} from "draft-js";
 import axios from "axios"
 import { withCookies } from 'react-cookie';
 import './styles.css';
@@ -53,12 +53,6 @@ class TextPane extends Component {
     this.editor.focus();
     const cookies = this.props.cookies;
     this.filename = cookies.get('fileName');
-    // let paragraphs = await this.getRawDocument();
-    // let newEditorState = EditorState.createEmpty();
-    // for (const p of paragraphs.reverse()) {
-    //   newEditorState = this.addParagraph(p, newEditorState)
-    // };
-    // let rawContent = await this.getRawBlocks();
     let rawContent = [];
     this.repetition = cookies.get('repetition');
     if (this.repetition !== null) {
@@ -67,6 +61,11 @@ class TextPane extends Component {
       rawContent = await this.getRawBlocks()};
     const blocks = convertFromRaw(rawContent);
     let newEditorState = EditorState.createWithContent(blocks, decorator);
+    let key = blocks.getLastBlock().key;
+    let selection = SelectionState.createEmpty(key); 
+    selection.set('anchorOffset', 10);
+    selection.set('hasFocus', true);
+    newEditorState = EditorState.forceSelection(newEditorState, selection);
     this.setState({editorState: newEditorState});
   };
 
