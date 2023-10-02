@@ -2,6 +2,7 @@
 import FileInput from './File-input';
 import TextPane from './TextPane';
 import RepetitionsTable from './Repetitions';
+import Navigation from './Navigation';
 import './styles.css';
 
 function App() {
@@ -22,7 +23,9 @@ function App() {
             </div>
           </div>
           <div class="col-sm-2">
-            <p>Sed ut perspiciatis...</p>
+            <div className="navigationBar">
+              <Navigation />
+            </div>
           </div>
         </div>
       </div>
