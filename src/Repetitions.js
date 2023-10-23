@@ -21,7 +21,7 @@ class RepetitionsTable extends Component {
               return { width: '10%', textAlign: 'center' };
             }
     },{
-      dataField: 'increments',
+      dataField: 'incrementsString',
       text: 'Increments',
       headerStyle: (col, colIndex) => {
               return { width: '35%', textAlign: 'center' };
@@ -44,7 +44,7 @@ class RepetitionsTable extends Component {
       style: {textAlign: 'right'},
       sort: true
     }, {
-      dataField: 'positions',
+      dataField: 'positionsString',
       text: 'Positions',
       headerStyle: (col, colIndex) => {
               return { width: '35%', textAlign: 'left' };
@@ -74,7 +74,7 @@ focus = async () => {
 
  onRowSelect = (row, isSelected, e) => {
   const cookies = this.props.cookies;
-  this.repetition = cookies.set('repetition', row.fragment, { path: '/' });
+  cookies.set('repetition', row);
 };
 
    render() {

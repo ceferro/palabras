@@ -54,14 +54,23 @@ class TextPane extends Component {
     const cookies = this.props.cookies;
     this.filename = cookies.get('fileName');
     let rawContent = [];
-    this.repetition = cookies.get('repetition');
+    let key = '';
+    let i = cookies.get('index');
+    let r = cookies.get('repetition');
+    if (r !== null) {
+      this.repetition = r?.fragment;
+    }
     if (this.repetition !== null) {
-      rawContent = await this.getBlocksMarking(this.repetition)}
+      rawContent = await this.getBlocksMarking(this.repetition); 
+      if (i) {
+        key = await this.getKeyOfBlock(i, this.repetition);
+      };
+    }
     else {
       rawContent = await this.getRawBlocks()};
     const blocks = convertFromRaw(rawContent);
     let newEditorState = EditorState.createWithContent(blocks, decorator);
-    let key = blocks.getLastBlock().key;
+    if(key.length !== 0) { key = blocks.getLastBlock().key; };
     let selection = SelectionState.createEmpty(key); 
     selection.set('anchorOffset', 10);
     selection.set('hasFocus', true);
@@ -115,6 +124,15 @@ async getBlocksMarking(aString) {
       return response.data;
    }
   catch (error) {this.handleError('Cannot get raw document', error)}
+};
+
+async getKeyOfBlock(anInteger, aString) {
+  if (anInteger == null) {return null};
+  try {
+    const response = await axios.get(this.baseUri + '/keyOfBlock/' + this.filename + '/index/' + anInteger + '/marking/' + aString);
+    return response.data;
+  }
+  catch (error) {this.handleError('Cannot get key of block', error)}
 };
 
  render(){    
