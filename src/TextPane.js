@@ -70,12 +70,17 @@ class TextPane extends Component {
       rawContent = await this.getRawBlocks()};
     const blocks = convertFromRaw(rawContent);
     let newEditorState = EditorState.createWithContent(blocks, decorator);
-    if(key.length !== 0) { key = blocks.getLastBlock().key; };
-    let selection = SelectionState.createEmpty(key); 
+    if(!key || key.length === 0) { key = blocks.getLastBlock().key; };
+    let selection = SelectionState.createEmpty(key);
+    selection.set('anchorKey', key); 
     selection.set('anchorOffset', 10);
+    selection.set('focusKey', key); 
+    selection.set('focusOffset', 10);
     selection.set('hasFocus', true);
     newEditorState = EditorState.forceSelection(newEditorState, selection);
     this.setState({editorState: newEditorState});
+    window.getSelection().focusNode.parentElement.scrollIntoView();
+    window.getSelection().anchorNode.parentElement.scrollIntoView();
   };
 
   onChange = editorState => {
